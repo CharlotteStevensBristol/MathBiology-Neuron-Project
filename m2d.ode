@@ -1,0 +1,43 @@
+# Class 2 model — 2D version
+
+# State equations
+V' = (i_stim - g_fast * m_inf * (V - E_Na)- g_slow * w * (V - E_K)- g_leak * (V - E_leak)) / C
+
+w' = phi_w * (w_inf - w) * cosh((V - beta_w) / (2 * X_w))
+
+# Steady-state activation curves
+m_inf = 0.5 * (1 + tanh((V - beta_m) / X_m))
+w_inf = 0.5 * (1 + tanh((V - beta_w) / X_w))
+
+# Parameters
+par i_stim=45         
+par g_fast=20         
+par g_slow=20         
+par g_leak=2          
+
+par E_Na=50           
+par E_K=-100          
+par E_leak=-70        
+
+par beta_m=-1.2       
+par beta_w=-13        
+par X_m=18            
+par X_w=10            
+
+par phi_w=0.15       
+par C=2              
+
+# Initial conditions
+init V=-80, w=-0.05
+
+# Simulation settings
+@ total=200
+@ dt=0.05
+@ maxstor=100000
+@ bounds=1000
+
+# Plot settings
+@ total=200, dt=0.05, bounds=1000
+@ xp=t, yp=V, xlo=0, xhi=200, ylo=-80, yhi=60
+
+done
